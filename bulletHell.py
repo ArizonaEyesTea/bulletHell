@@ -69,7 +69,6 @@ class Player(simpleGE.Sprite):
         if walking:        
             self.copyImage(self.walkAnim.getNext(self.animRow))
         else:
-            #use the current idle image
             self.copyImage(self.walkAnim.getCellImage(0, self.animRow))
             
         self.inAir = True
@@ -122,7 +121,7 @@ class Game(simpleGE.Scene):
         
         self.lblScore = LblScore()
         self.lblTime = LblTime()
-        self.lblHealth = LblHealth()  # Add health label
+        self.lblHealth = LblHealth()  
         self.score = 0
         self.timer = simpleGE.Timer()
         self.timer.totalTime = 40
@@ -154,27 +153,24 @@ class Game(simpleGE.Scene):
                         self.bullet,
                         self.lblTime,
                         self.lblScore,
-                        self.lblHealth,  # Add health label to the sprite list
+                        self.lblHealth,  
                         self.player,
                         self.blocks]
 
     def process(self):
-        # Handle bullet collisions
         for bullet in self.bullet:
             if self.player.collidesWith(bullet):
                 self.bulletSound.play()
                 bullet.reset()
-                self.player.health -= 1  # Reduce health
-                self.lblHealth.text = f"Health: {self.player.health}"  # Update health display
-                if self.player.health <= 0:  # End the game if health is zero
+                self.player.health -= 1  
+                self.lblHealth.text = f"Health: {self.player.health}"  
+                if self.player.health <= 0:  
                     self.stop()
 
-        # Update timer
         self.lblTime.text = f"Time Left: {self.timer.getTimeLeft():.2f}"
         if self.timer.getTimeLeft() < 0:
             self.stop()
         
-        # Update score
         if self.timer.getTimeLeft() > 0:
             self.score += 1
             self.lblScore.text = f"Score: {self.score}"
@@ -224,7 +220,7 @@ class Instructions(simpleGE.Scene):
                         self.btnPlay]
         
     def process(self):
-        #buttons
+        
         if self.btnQuit.clicked:
             self.response = "Quit"
             self.stop()
@@ -232,7 +228,7 @@ class Instructions(simpleGE.Scene):
             self.response = "Play"
             self.stop()
 
-        #arrow keys
+        
         if self.isKeyPressed(pygame.K_UP):
             self.response = "Play"
             self.stop()
