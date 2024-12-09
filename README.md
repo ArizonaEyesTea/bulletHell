@@ -40,4 +40,7 @@ How far did you stray from the game design document?
 How did you stay on track?
 - by making milestones for myself so that their was steady progress 
 
+===============================================================================================================================================================================================
+
+
 
